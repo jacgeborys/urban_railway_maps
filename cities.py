@@ -211,13 +211,15 @@ CITIES = {
         'name': 'Sydney',
         'center': (-33.8688, 151.2093),
         'bounds_km': 20,
-        'utm_zone': 56  # UTM Zone 56S for Australia
+        'utm_zone': 56,
+        'hemisphere': 'S'  # Specify Southern Hemisphere
     },
     'melbourne': {
         'name': 'Melbourne',
         'center': (-37.8136, 144.9631),
         'bounds_km': 20,
-        'utm_zone': 55  # UTM Zone 55S for Australia
+        'utm_zone': 55,
+        'hemisphere': 'S'  # Specify Southern Hemisphere
     },
     'shanghai': {
         'name': 'Shanghai',
@@ -260,11 +262,5 @@ CITIES = {
         'center': (51.9225, 4.4792),
         'bounds_km': 20,
         'utm_zone': 31  # UTM Zone 31N for Netherlands
-    },
-    'melbourne': {
-        'name': 'Melbourne',
-        'center': (-37.8136, 144.9631),
-        'bounds_km': 20,
-        'utm_zone': 55  # UTM Zone 55S for Australia
     },
 }
