@@ -263,4 +263,19 @@ CITIES = {
         'bounds_km': 20,
         'utm_zone': 31  # UTM Zone 31N for Netherlands
     },
+    'buenosaires': {
+        'name': 'Buenos Aires',
+        'center': (-34.6037, -58.3816),
+        'bounds_km': 20,
+        'utm_zone': 21,  # UTM Zone 21S for Argentina
+        'hemisphere': 'S'  # Specify Southern Hemisphere
+    },
+    'sao_paulo': {
+        'name': 'São Paulo',
+        'center': (-23.5505, -46.6333),
+        'bounds_km': 20,
+        'utm_zone': 23,  # UTM Zone 23S for Brazil
+        'hemisphere': 'S'  # Specify Southern Hemisphere
+    },
+
 }
