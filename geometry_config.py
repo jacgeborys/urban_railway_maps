@@ -12,29 +12,41 @@ TRANSFER_MAX_DISTANCES = {
     'light_rail_tram': 200,
     'light_rail_metro': 250,
     'light_rail_train': 300,
-    # Same-type connections are for merging nearby separate platforms of large stations
-    'tram_tram': 1,
+    'tram_tram': 50,
     'metro_metro': 250,
     'train_train': 250,
-    'light_rail_light_rail': 1,
+    'light_rail_light_rail': 50,
 }
+
+# TRANSFER_MAX_DISTANCES = {
+#     'metro_tram': 10,
+#     'train_tram': 10,
+#     'train_metro': 10,
+#     'light_rail_tram': 10,
+#     'light_rail_metro': 10,
+#     'light_rail_train': 10,
+#     'tram_tram': 10,
+#     'metro_metro': 10,
+#     'train_train': 10,
+#     'light_rail_light_rail': 10,
+# }
 
 # === STOP PROCESSING CONFIGURATION ===
 # Rules for merging or splitting stops during processing.
 STOP_PROCESSING_CONFIG = {
-    # Max distance (meters) between stops of the same name but different types
-    # before they are forced to be separate entities rather than a single transfer point.
     'max_conflict_distance': 50,
-
-    # --- NEW SETTING ---
-    # The distance (in meters) from an active line to search for valid stops.
-    # Stops outside this buffer will be discarded.
     'stop_proximity_buffer': 50,
+    'line_simplification_tolerance': 10,
 }
 
 # === TRANSFER VISUALIZATION CONFIGURATION ===
 # Defines the geometry of the "stadium" shapes drawn for transfers.
+# TRANSFER_VISUAL_CONFIG = {
+#     'stadium_length_padding': 80,
+#     'stadium_width': 120, # This defines the diameter of single-point circles (radius is half)
+# }
+
 TRANSFER_VISUAL_CONFIG = {
-    'stadium_length_padding': 80,
-    'stadium_width': 120,
+    'stadium_length_padding': 20,
+    'stadium_width': 90, # This defines the diameter of single-point circles (radius is half)
 }
