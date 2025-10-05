@@ -43,14 +43,12 @@ CITY_NAMES = {
     'sao_paulo': 'São Paulo',
 }
 
-
 def get_city_display_name(city_key):
     """Get the display name for a city."""
     if city_key in CITY_NAMES:
         return CITY_NAMES[city_key]
     # Convert key to title case
     return city_key.replace('_', ' ').title()
-
 
 def create_collage(output_filename='transit_maps_collage.png'):
     """Create a collage of transit maps."""
@@ -85,15 +83,16 @@ def create_collage(output_filename='transit_maps_collage.png'):
         y = row * (CELL_SIZE + TITLE_HEIGHT + PADDING)
 
         # Load city map
-        img_path = f'img/{city_key}_transit_map_clean.png'  # Add '_clean'
+        img_path = f'img/clean/{city_key}_transit_map_clean.png'
 
         if not os.path.exists(img_path):
-            print(f"Warning: Map not found for {city_key} at {img_path}")
+            print(f"Warning: Clean map not found for {city_key} at {img_path}")
+            print(f"         Run: python main.py {city_key} --clean")
             # Draw placeholder
             draw.rectangle([x, y, x + CELL_SIZE, y + CELL_SIZE],
-                           fill='#f0f0f0', outline='#cccccc')
+                          fill='#f0f0f0', outline='#cccccc')
             draw.text((x + CELL_SIZE // 2, y + CELL_SIZE // 2),
-                      'Map not found', fill='#999999', anchor='mm', font=font)
+                     'Map not found', fill='#999999', anchor='mm', font=font)
         else:
             try:
                 city_img = Image.open(img_path)
@@ -130,7 +129,6 @@ def create_collage(output_filename='transit_maps_collage.png'):
 
     return collage
 
-
 def create_compact_collage(output_filename='transit_maps_collage_3x4.png'):
     """Create a more compact 3×4 collage with 12 cities."""
 
@@ -156,7 +154,6 @@ def create_compact_collage(output_filename='transit_maps_collage_3x4.png'):
     SELECTED_CITIES = original_cities
 
     return result
-
 
 if __name__ == "__main__":
     import sys

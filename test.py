@@ -132,7 +132,7 @@ def debug_stops_near_location(target_lat, target_lon, search_radius_km=0.5, max_
 
 if __name__ == "__main__":
     # The location you mentioned (Stephansplatz area in Vienna)
-    target_lat = 48.197552
-    target_lon = 16.348042
+    target_lat = 37.741742
+    target_lon = -122.504438
 
     debug_stops_near_location(target_lat, target_lon, search_radius_km=0.5, max_distance_m=200)

@@ -84,23 +84,33 @@ def classify_stop(stop_element):
     """Classifies a stop element into a transit category."""
     tags = stop_element.get('tags', {})
 
-    # Exclude entrances - we only want actual station/platform nodes
+    # Exclude entrances
     if tags.get('railway') == 'subway_entrance':
         return None
     if tags.get('railway') == 'train_station_entrance':
         return None
 
-    # Now classify actual stops
+    # Prioritize explicit mode tags over railway infrastructure tags
     if tags.get('subway') == 'yes' or tags.get('station') == 'subway':
         return 'metro'
-    if tags.get('tram') == 'yes' or tags.get('railway') == 'tram_stop':
-        return 'tram'
-    if tags.get('light_rail') == 'yes' or tags.get('station') == 'light_rail':
+
+    # Check light_rail=yes BEFORE checking railway=tram_stop
+    if tags.get('light_rail') == 'yes':
         return 'light_rail'
+
+    # Only classify as tram if explicitly tram=yes (not just railway=tram_stop)
+    if tags.get('tram') == 'yes':
+        return 'tram'
+
+    # railway=tram_stop without explicit mode tags -> tram
+    if tags.get('railway') == 'tram_stop' and tags.get('light_rail') != 'yes':
+        return 'tram'
+
     if tags.get('train') == 'yes':
         return 'train'
     if tags.get('railway') in ['station', 'stop', 'halt']:
         return 'train'
+
     return None
 
 def classify_non_operational_way(way_element):

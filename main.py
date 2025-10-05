@@ -425,8 +425,14 @@ def plot_transit_map(lines_by_type, stops_by_type, non_operational_lines, transf
     return fig
 
 
-def generate_city_map(city_key):
-    """Orchestrates the fetching, processing, and plotting for a city."""
+def generate_city_map(city_key, generate_clean=True):
+    """
+    Orchestrates the fetching, processing, and plotting for a city.
+
+    Args:
+        city_key: The city identifier from CITIES dict
+        generate_clean: If True, also generates clean version (without labels) for collages
+    """
     if city_key not in CITIES:
         print(f"City '{city_key}' not found.")
         return
@@ -521,10 +527,11 @@ def generate_city_map(city_key):
         fig = plot_transit_map_clean(lines_by_type, stops_by_type_for_plotting, non_operational_lines,
                                      transfer_polygons, city_config)
 
-        # Save clean version
-        filename_clean = f'img/{city_key}_transit_map_clean.png'
-        plt.savefig(filename_clean, dpi=300, bbox_inches='tight', pad_inches=0)
-        print(f"  Clean map saved as {filename_clean}")
+        # Save clean version if requested
+        if generate_clean:
+            filename_clean = f'img/clean/{city_key}_transit_map_clean.png'
+            plt.savefig(filename_clean, dpi=300, bbox_inches='tight', pad_inches=0)
+            print(f"  Clean map saved as {filename_clean}")
 
         # --- Add decorative elements on top for labeled version ---
         add_map_labels(fig, city_config, lines_by_type, stops_by_type_for_plotting)
@@ -533,6 +540,7 @@ def generate_city_map(city_key):
         filename = f'img/{city_key}_transit_map.png'
         plt.savefig(filename, dpi=300, bbox_inches='tight')
         print(f"  Labeled map saved as {filename} in {time.time() - plot_start:.2f} seconds.")
+
 
         # Close figure
         plt.close(fig)
